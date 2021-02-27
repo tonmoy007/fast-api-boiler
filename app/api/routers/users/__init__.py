@@ -1,4 +1,4 @@
-from datetime import time
+import time
 from typing import Callable
 
 from fastapi import APIRouter, Request, Response

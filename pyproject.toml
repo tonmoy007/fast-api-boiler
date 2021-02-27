@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "fast-api-boiler"
+version = "0.1.0"
+description = "FAst api boiler plate"
+authors = ["tonmoy <shtonmoy007@gmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+fastapi = {extras = ["all"], version = "^0.63.0"}
+fastapi-utils = "^0.2.1"
+uvicorn = "^0.13.4"
+pydantic = "^1.7.3"
+passlib = "^1.7.4"
+PyJWT = "^2.0.1"
+databases = "^0.4.1"
+asyncpg = "^0.22.0"
+alembic = "^1.5.5"
+Unidecode = "^1.2.0"
+loguru = "^0.5.3"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

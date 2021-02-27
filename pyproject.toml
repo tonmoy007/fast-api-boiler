@@ -18,6 +18,8 @@ asyncpg = "^0.22.0"
 alembic = "^1.5.5"
 Unidecode = "^1.2.0"
 loguru = "^0.5.3"
+mysqlclient = "^2.0.3"
+aiomysql = "^0.0.21"
 
 [tool.poetry.dev-dependencies]
 

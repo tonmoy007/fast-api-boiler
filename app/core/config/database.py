@@ -1,4 +1,6 @@
-from app.core.config import env
+from starlette.config import Config
+
+env = Config(".env")
 
 
 class DB:

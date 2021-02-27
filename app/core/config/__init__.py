@@ -7,6 +7,7 @@ from loguru import logger
 from starlette.config import Config
 from starlette.datastructures import Secret, CommaSeparatedStrings
 
+from app.core.config.database import DB
 from app.core.loggings import InterceptHandler
 
 env = Config(".env")
@@ -15,7 +16,7 @@ TITLE = env("APP_TITLE", default="Fast Api")
 API_PREFIX = "/api"
 JWT_TOKEN_PREFIX = "Token"  # noqa: S105
 VERSION = "0.0.1"
-DATABASE_URL: DatabaseURL = env("DB_CONNECTION", cast=DatabaseURL)
+# DATABASE_URL: DatabaseURL = env("DB_CONNECTION", cast=DatabaseURL)
 MAX_CONNECTIONS_COUNT: int = env("MAX_CONNECTIONS_COUNT", cast=int, default=10)
 MIN_CONNECTIONS_COUNT: int = env("MIN_CONNECTIONS_COUNT", cast=int, default=10)
 
@@ -37,4 +38,5 @@ for logger_name in LOGGERS:
 
 logger.configure(handlers=[{"sink": sys.stderr, "level": LOGGING_LEVEL}])
 
-SENTRY_DSN=env("SENTRY_DSN")
+SENTRY_DSN = env("SENTRY_DSN")
+SQLALCHEMY_DATABASE_URI = DB.to_string()

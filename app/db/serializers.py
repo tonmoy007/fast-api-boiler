@@ -2,6 +2,8 @@ import datetime
 import uuid
 from functools import singledispatch
 
+from sqlalchemy import Column, Integer, DateTime
+
 
 @singledispatch
 def serialize(rv):
@@ -40,6 +42,7 @@ class ModelSerializerMixin(object):
     """
     Serializable Mixin for the SQLAlchemy objects.
     """
+
     def to_dict(self, exclude=None, only=None):
         """Convert SQLAlchemy object to `dict`.
 
@@ -96,3 +99,9 @@ class ModelSerializerMixin(object):
     def _serialize_attr(self, attr):
         _val = getattr(self, attr)
         return serialize(_val)
+
+    id = Column(Integer, primary_key=True, autoincrement=True, index=True)
+    created_at = Column(DateTime, nullable=False, default=datetime.datetime.now,
+                        index=True)
+    deleted_at = Column(DateTime, nullable=True)
+    # query_class = QueryWithSoftDelete

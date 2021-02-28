@@ -1,9 +1,9 @@
 [tool.poetry]
-name = "fast-api-boiler"
+name = "sheba-accounting"
 version = "0.1.0"
-description = "FAst api boiler plate"
-authors = ["tonmoy <shtonmoy007@gmail.com>"]
-license = "MIT"
+description = "Sheba sManagager Accounting project"
+authors = ["tonmoy <tonmoy007@sheba.xyz>"]
+license = "Sheba Platform limited"
 
 [tool.poetry.dependencies]
 python = "^3.8"
@@ -18,8 +18,12 @@ asyncpg = "^0.22.0"
 alembic = "^1.5.5"
 Unidecode = "^1.2.0"
 loguru = "^0.5.3"
+sentry-sdk = "^0.20.3"
+SQLAlchemy-Utils = "^0.36.8"
+SQLAlchemy = "^1.3.23"
+mysql-connector-python = "^8.0.23"
 mysqlclient = "^2.0.3"
-aiomysql = "^0.0.21"
+PyMySQL = "^1.0.2"
 
 [tool.poetry.dev-dependencies]
 

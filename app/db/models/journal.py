@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy import Column, Integer, ForeignKey, Numeric, UnicodeText, DATETIME, String, TIMESTAMP, text
+from sqlalchemy import Column, Integer, ForeignKey, Numeric, UnicodeText, DATETIME, String
 from sqlalchemy.orm import relationship, backref
 
 from app.db.base_model import BaseModel
@@ -9,7 +9,6 @@ from app.db.serializers import ModelSerializerMixin
 
 class Journal(BaseModel, ModelSerializerMixin):
     __tablename__ = "journals"
-    id = Column(Integer, primary_key=True, autoincrement=True, index=True)
     account_id = Column(Integer, ForeignKey("accounts.id", ondelete="cascade", onupdate="cascade"), nullable=False,
                         index=True)
     sub_account_id = Column(Integer, ForeignKey("accounts.id", ondelete="cascade", onupdate="cascade"), nullable=False,

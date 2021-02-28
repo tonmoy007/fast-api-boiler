@@ -25,5 +25,5 @@ COPY ./app /app
 #
 #CMD poetry run alembic upgrade head && \
 #    poetry run uvicorn --host=0.0.0.0 app.main:app
-#sudo apt-get install python3-dev libmysqlclient-dev
+#sudo apt-get install python3-dev libmysqlclient-dev mysql-client
 #PYTHONPATH=. alembic -c alembic.ini revision --autogenerate -m "init"

@@ -6,7 +6,9 @@ from sqlalchemy.dialects.mysql import ENUM
 from sqlalchemy.orm import relationship, backref
 
 from app.db.base_model import BaseModel
-from app.db.serializers import ModelSerializerMixin
+from app.db.models.mixins import ModelSerializerMixin
+from app.db.models.mixins.common import DefaultMixin
+from app.db.models.mixins.common.soft_delete import SoftDeleteMixin
 
 
 class EntrySource(enum.Enum):
@@ -19,12 +21,12 @@ class EntrySource(enum.Enum):
     EMI = "emi"
 
 
-class Entry(BaseModel, ModelSerializerMixin):
+class Entry(BaseModel, DefaultMixin, ModelSerializerMixin, SoftDeleteMixin):
     __tablename__ = "entries"
     user_id = Column(Integer, ForeignKey("users.id", ondelete="cascade", onupdate="cascade"), nullable=False,
                      index=True)
+    user = relationship("User", back_populates="entries")
     amount = Column(NUMERIC(precision=2, scale=2), default=0.00, nullable=False)
-    user = relationship("User", backref=backref("entries", lazy="joined"))
     source_type = Column(ENUM(EntrySource), index=True, nullable=False)
     source_id = Column(Integer, nullable=True, index=True)
     customer_id = Column(Integer, nullable=True, index=True)

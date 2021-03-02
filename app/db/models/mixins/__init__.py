@@ -1,41 +1,4 @@
-import datetime
-import uuid
-from functools import singledispatch
-
-from sqlalchemy import Column, Integer, DateTime
-
-
-@singledispatch
-def serialize(rv):
-    """
-    Define a generic serializable function.
-    """
-    return rv
-
-
-@serialize.register(datetime.datetime)
-def serialize_dt(rv):
-    """Register the `datetime.datetime` type
-    for the generic serializable function.
-
-    Serialize a `datetime` object to `string`
-    according to strict-rfc3339.
-    :param rv: object to be serialized
-    :type rv: datetetime.datetime
-    :returns: string
-    """
-    return datetime.datetime.strftime(rv, '%Y-%m-%dT%H:%M:%S.%fZ')
-
-
-@serialize.register(uuid.UUID)
-def serialize_uuid(rv):
-    """Register the `uuid.UUID` type
-    for the generic serializable function.
-    :param rv: object to be serialized
-    :type rv: uuid.UUID
-    :returns: string
-    """
-    return str(rv)
+from app.services.serializers import serialize
 
 
 class ModelSerializerMixin(object):
@@ -99,9 +62,3 @@ class ModelSerializerMixin(object):
     def _serialize_attr(self, attr):
         _val = getattr(self, attr)
         return serialize(_val)
-
-    id = Column(Integer, primary_key=True, autoincrement=True, index=True)
-    created_at = Column(DateTime, nullable=False, default=datetime.datetime.now,
-                        index=True)
-    deleted_at = Column(DateTime, nullable=True)
-    # query_class = QueryWithSoftDelete

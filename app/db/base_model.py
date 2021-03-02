@@ -69,6 +69,4 @@ class CustomBase(object):
 
 
 BaseModel = declarative_base(cls=CustomBase, constructor=None)
-BaseModel.query = db_session.query_property()
-BaseModel.base_query = db_session.query
 BaseModel.metadata.create_all(bind=engine)
